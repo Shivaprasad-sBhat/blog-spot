@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,21 +14,23 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Users {
+public class Users  {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
     private String firstName;
     private String lastName;
-
+    
+    
     @Column(unique = true)
     private String email;
 
+    private String password;
     private Integer follwers;
 
     @OneToMany(mappedBy = "users",cascade = CascadeType.ALL)
-    private List<Blog> blogs;
+    private List<Blog> blogs = new ArrayList<>();
 
     @ElementCollection
     private List<Users> followerDetails = new ArrayList<>();
