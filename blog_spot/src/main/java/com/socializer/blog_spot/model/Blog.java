@@ -27,7 +27,6 @@ public class Blog  {
     @OneToMany(mappedBy = "blogs",cascade = CascadeType.ALL)
     private List<Comments> comments =new ArrayList<>();
 
-
     @OneToOne(mappedBy = "blog",cascade = CascadeType.ALL)
     private Article article;
 
