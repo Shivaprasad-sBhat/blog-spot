@@ -27,7 +27,6 @@ public class Users  {
     private String email;
 
     private String password;
-    private Integer follwers;
 
     @OneToMany(mappedBy = "users",cascade = CascadeType.ALL)
     private List<Blog> blogs = new ArrayList<>();
