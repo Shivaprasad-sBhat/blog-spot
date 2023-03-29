@@ -1,5 +1,6 @@
 package com.socializer.blog_spot.controller;
 
+import com.socializer.blog_spot.dto.UsersDto;
 import com.socializer.blog_spot.model.Users;
 import com.socializer.blog_spot.repository.UserRepo;
 import com.socializer.blog_spot.service.UserServiceImpl;
@@ -28,10 +29,10 @@ public class UserController {
 
 
     @PostMapping("/users")
-    private ResponseEntity<Users> registerUser(@RequestBody Users users){
+    private ResponseEntity<UsersDto> registerUser(@RequestBody UsersDto usersDto){
 
-        users.setPassword(passwordEncoder.encode(users.getPassword()));
-        Users newUsers = userService.registerUser(users);
+        usersDto.setPassword(passwordEncoder.encode(usersDto.getPassword()));
+        UsersDto newUsers = userService.registerUser(usersDto);
 
         return new ResponseEntity<>(newUsers, HttpStatus.CREATED);
 

@@ -26,6 +26,8 @@ public class Article {
     @ElementCollection
     private List<String> tags = new ArrayList<>();
 
+
+
     @OneToOne
     private Blog blog;
 }
