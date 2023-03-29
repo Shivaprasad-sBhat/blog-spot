@@ -10,10 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -38,10 +35,20 @@ public class UserController {
 
     }
 
-    @GetMapping("/getUsers")
-    public Users viewProfile(Authentication authentication){
+    @PutMapping("/users/update/details")
+    public    ResponseEntity<UsersDto> updateUserDetails(@RequestBody UsersDto usersDto ){
 
-        return userRepo.findByEmail(authentication.getName()).orElseThrow(()->new BadCredentialsException("not found"));
+        UsersDto updateUserDetails = userService.updateUserDetails(usersDto);
+
+        return new ResponseEntity<>(updateUserDetails, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/users/update/password")
+    public ResponseEntity<String> updateUserPassword(String password){
+        password =    passwordEncoder.encode(password);
+        String details = userService.updateUserPassword(password);
+
+        return new ResponseEntity<>(details, HttpStatus.CREATED);
     }
 
 }
